@@ -1,0 +1,27 @@
+{% extends "index.html" %}
+
+{% block title %} Inicio {% endblock %}
+
+{% load static %}
+
+{% block extra_styles %}
+{% endblock %}
+
+
+{% block content %}
+  <section class="section is-medium has-text-centered" style="background-image: url({{site.main_image.url}});">
+      <h1 class="title">{{core.organization_name}}</h1>
+      <h2 class="subtitle">{{core.presentation}}</h2>
+  </section>
+
+  <div class="content">
+
+    <section class="section">
+      {{core.summary | safe}}
+    </section>
+  </div>
+  
+  {% endblock %}
+  
+  {% block extra_scripts %}
+{% endblock %}

@@ -1,0 +1,9 @@
+[env]
+env = local
+secret_key = V3ryS3cret
+
+[local]
+engine = django.db.backends.sqlite3
+db_name = db.sqlite3
+debug = True
+host = 0.0.0.0, 127.0.0.1

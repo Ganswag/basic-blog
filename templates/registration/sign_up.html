@@ -1,0 +1,28 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block title %} Registro {% endblock %}
+{% block section%} Registro {% endblock %}
+
+{% block extra_styles %}
+{% endblock %}
+
+
+{% block content %}
+<style type="text/css">label{display: none;}</style>
+
+<div class="jumbotron p-5 text-center">
+    <h1>Crear nuevo usuario</h1>
+    <p>Ingresa tus datos para crear un nuevo usuario</p>
+
+    <form method="POST">{% csrf_token %}
+        {{form.as_p}}
+        {{form.first_name}}
+        <button type="submit" class="btn btn-primary my-3">Crear nuevo usuario</button>
+    </form>
+</div>
+
+{% endblock %}
+
+{% block extra_scripts %}
+{% endblock %}

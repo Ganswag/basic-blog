@@ -1,0 +1,36 @@
+{% extends "index.html" %}
+
+{% block title %} {{object.user.first_name}} {{object.user.last_name}} {% endblock %}
+{% block description %} {{object.user.bio}} {% endblock %}
+
+{% load static %}
+
+{% block extra_styles %}
+
+{% endblock %}
+
+
+{% block content %}
+<section id="detalles-del-autor">
+   <div class="row mt-3">
+    <div class="col-md-9 mx-auto">
+      <h2 class="section-heading mb-4">{{object.user.first_name}} {{object.user.last_name}}</h2>
+      <div>
+        {{ object.bio|safe }}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% if articles %}
+<hr>
+
+<section id="mas-del-autor" class="container">
+  <h2>Todas sus contribuciones:</h2>
+  {% include 'blog/article_deck.html' with articles=articles %}
+</section>
+{% endif %}
+{% endblock %}
+
+{% block extra_scripts %}
+{% endblock %}

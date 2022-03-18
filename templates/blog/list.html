@@ -1,0 +1,30 @@
+{% extends "index.html" %}
+
+{% block title %} Artículos {% endblock %}
+{% block description %}Un listado de todos nuestros artículos disponibles.
+Recuerda que cada uno de ellos ha sido evaluado para ofrecer la mejor información.{% endblock %}
+
+{% load static %}
+
+{% block extra_styles %}
+
+{% endblock %}
+
+
+{% block content %}
+<section class="section">
+
+  <div class="container mb-4">
+    <div class="row mt-3">
+      {#% include 'blog/categories_sidebar.html' with categories=categories %#}
+
+      <div class="col-md-10">
+        {% include 'blog/deck.html' with articles=article_list %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+{% endblock %}
