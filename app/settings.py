@@ -134,7 +134,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'rstatic')
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
-    ('node_modules', os.path.join(BASE_DIR, 'node_modules/')),
+   ('node_modules', os.path.join(BASE_DIR, 'node_modules/')),
 )
 
 MEDIA_URL = '/media/'
