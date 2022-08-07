@@ -33,10 +33,15 @@ class SiteData(models.Model):
 
 
 class ContentManagmentSystem(models.Model):
+    def custom_uplad_to(instance, filename):
+        old_instance = ContentManagmentSystem.objects.get(slug=instance.slug)
+        old_instance.avatar.delete()
+        return 'site/cms/' + filename
+
     slug = models.SlugField(max_length=250, primary_key=True)
     title = models.CharField(verbose_name="Título", max_length=200)
     main_picture = models.ImageField(
-        upload_to='CMS/', verbose_name="Foto de portada"
+        upload_to=custom_uplad_to, verbose_name="Foto de portada"
     )
     content = RichTextField(
         verbose_name="Contenido", null=False

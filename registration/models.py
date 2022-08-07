@@ -27,6 +27,9 @@ class Profile(models.Model):
     bio = models.CharField(
         verbose_name="Biografía", max_length=300,
         null=True, blank=True)
+    approved = models.BooleanField(
+        verbose_name="Aprobado", null=False, default=False 
+    )
 
 
 @receiver(pre_save, sender=User)

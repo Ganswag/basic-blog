@@ -9,124 +9,49 @@
 
 
 {% block content %}
-<body>
-  <section class="hero is-medium"
-   style="background-image: url('https://cdn.pixabay.com/photo/2016/01/08/18/00/antelope-canyon-1128815_960_720.jpg');
-  background-repeat: no-repeat; background-size: 100%;" >
-        <div class="hero-body">
-          <div class="container has-text-centered">
-            <img src="http://www.dict.unam.mx/images/logos/fi02.png" width="150" height="40">
-            <h2 class="title" style="color: whitesmoke;">
-              Academia de Geología 
-            <h2 class="subtitle" style="color:whitesmoke;">
-              Espacio para la enseñanza-aprendizaje de la Geología Física
-            </h2>
-          </div>
-        </div>
-      </section>
-      <section class="blog-posts">
-        <div class="container">
-          <div class="columns">
-            <div class="column is-10 is-offset-1">
-              <div class="columns featured-post is-multiline">
-                <div class="column is-12 post">
-                  <article class="columns featured">
-                    <div class="column is-7 post-img ">
-                      <img src="https://cdn.emk.dev/templates/featured-image.png" alt="Featured Image">
-                    </div>
-                    <div class="column is-5 featured-content va">
-                      <div>
-                        <h3 class="heading post-category">Meteorización</h3>
-                        <h1 class="title post-title">Blog Posts Template</h1>
-                        <p class="post-excerpt">This template is based off of the official default blog template created by the fine folks over at <a href="https://ghost.io">Ghost</a>. If you are looking for a fully featured blog platform, I highly recommend checking them out!</p>
-                        <br>
-                        <a href="#" class="button is-primary">Read More</a>
-                      </div>
-    
-                    </div>
-                  </article>
-                </div>
-              </div>
-              <hr>
-              <div class="columns is-multiline">
-                <div class="column post is-6">
-                  <article class="columns is-multiline">
-                    <div class="column is-12 post-img">
-                      <img src="" alt="Featured Image">
-                    </div>
-                    <div class="column is-12 featured-content ">
-                      <h3 class="heading post-category">Libro Geología Física</h3>
-                      <h1 class="title post-title">Slightly Longer Blog Post Title</h1>
-                      <p class="post-excerpt">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus ratione harum eaque, animi nulla tempore quis, quam voluptatum.</p>
-                      <br>
-                      <a href="#" class="button is-primary">Read More</a>
-                    </div>
-                  </article>
-                </div>
-                <div class="column post is-6">
-                  <article class="columns is-multiline">
-                    <div class="column is-12 post-img">
-                      <img src="https://cdn.emk.dev/templates/post-img.png" alt="Featured Image">
-                    </div>
-                    <div class="column is-12 featured-content ">
-                      <h3 class="heading post-category">Category Name</h3>
-                      <h1 class="title post-title">Slightly Longer Blog Post Title</h1>
-                      <p class="post-excerpt">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus ratione harum eaque, animi nulla tempore quis, quam voluptatum.</p>
-                      <br>
-                      <a href="#" class="button is-primary">Read More</a>
-                    </div>
-                  </article>
-                </div>
-                <div class="column post is-4">
-                  <article class="columns is-multiline">
-                    <div class="column is-12 post-img">
-                      <img src="https://cdn.emk.dev/templates/post-img.png" alt="Featured Image">
-                    </div>
-                    <div class="column is-12 featured-content ">
-                      <h3 class="heading post-category">Category Name</h3>
-                      <h1 class="title post-title">Slightly Longer Blog Post Title</h1>
-                      <p class="post-excerpt">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus ratione harum eaque, animi nulla tempore quis, quam voluptatum.</p>
-                      <br>
-                      <a href="#" class="button is-primary">Read More</a>
-                    </div>
-                  </article>
-                </div>
-                <div class="column post is-4">
-                  <article class="columns is-multiline">
-                    <div class="column is-12 post-img">
-                      <img src="https://cdn.emk.dev/templates/post-img.png" alt="Featured Image">
-                    </div>
-                    <div class="column is-12 featured-content ">
-                      <h3 class="heading post-category">Category Name</h3>
-                      <h1 class="title post-title">Slightly Longer Blog Post Title</h1>
-                      <p class="post-excerpt">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus ratione harum eaque, animi nulla tempore quis, quam voluptatum.</p>
-                      <br>
-                      <a href="#" class="button is-primary">Read More</a>
-                    </div>
-                  </article>
-                </div>
-                <div class="column post is-4">
-                  <article class="columns is-multiline">
-                    <div class="column is-12 post-img">
-                      <img src="https://cdn.emk.dev/templates/post-img.png" alt="Featured Image">
-                    </div>
-                    <div class="column is-12 featured-content ">
-                      <h3 class="heading post-category">Category Name</h3>
-                      <h1 class="title post-title">Slightly Longer Blog Post Title</h1>
-                      <p class="post-excerpt">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus ratione harum eaque, animi nulla tempore quis, quam voluptatum.</p>
-                      <br>
-                      <a href="#" class="button is-primary">Read More</a>
-                    </div>
-                  </article>
-                </div>
-              </div>
-            </div>
-          </div>
-    
-      </section>
-    </body>
+<section class="section is-medium"
+  style="background-image: url('{% static '/images/main-image.jpg' %}');
+  background-repeat: no-repeat; background-size: 100%;"
+>
+  <div class="container has-text-centered" style="
+    background-color: rgba(150, 150, 150, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 5px;
+    padding: 50px;"
+  >
+    <img src="{% static '/images/facultad-ingenieria.png' %}" width="150" height="40">
+    <h2 class="title" style="color: whitesmoke;">
+      Academia de Geología 
+    <h2 class="subtitle" style="color:whitesmoke;">
+      Espacio para la enseñanza-aprendizaje de la Geología Física
+    </h2>
+  </div>
+</section>
 
-  {% endblock %}
+<section class="section">
+  <div class="columns is-centered">
+    <div class="column is-8">
+      <div class="content is-medium">
+        <p>Holiwis</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% if articles %}
+<hr>
+<section class="section container">
+  <h1 class="title">Últimas entradas</h1>
+  <div class="columns is-10">
+    {% for article in articles %}
+    {% include 'blog/card.html' with article=article %}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% endblock %}
   
-  {% block extra_scripts %}
+{% block extra_scripts %}
 {% endblock %}

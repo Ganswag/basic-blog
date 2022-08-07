@@ -3,16 +3,16 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 
 from blog.models import Article
+from core.views import WebsiteCommonMixin
 from registration.models import Profile
 
 
-class CollaboratorListView(ListView):
+class CollaboratorListView(WebsiteCommonMixin, ListView):
     model = Profile
     template_name = 'collaborators/collaborator_list.html'
-    paginate_by = 20
 
 
-class CollaboratorDetailView(DetailView):
+class CollaboratorDetailView(WebsiteCommonMixin, DetailView):
     model = Profile
     template_name = 'collaborators/collaborator_detail.html'
 

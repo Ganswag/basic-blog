@@ -20,8 +20,7 @@
         <link href="{% static 'css/app.css' %}" rel="stylesheet">
         {% load compress %}
         {% compress css inline %}
-
-        {% block extra_styles %} {% endblock %}
+          {% block extra_styles %} {% endblock %}
         {% endcompress %}
         <!-- Needed CDN scripts -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
@@ -37,7 +36,7 @@
         <link rel="manifest" href="{% static 'manifest.json' %}">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <meta name="apple-mobile-web-app-title" content="Roberto Juárez">
+        <meta name="apple-mobile-web-app-title" content="">
         <link rel="apple-touch-icon" href="{{ site.logo.url }}">
         <meta name="msapplication-TileImage" content="{{ site.logo.url }}">
         <meta name="msapplication-TileColor" content="#fff">
@@ -48,7 +47,7 @@
     <body>
       {% include 'base/header.html' %}
 
-      <main id="main" role="main">
+      <main class="main-content" id="main" role="main">
         {% block content %}{% endblock %}
       </main>
 
@@ -56,6 +55,7 @@
     </body>
 
     {% compress js %}
+      <script src="{% static 'js/app.js' %}"></script>
       {% block extra_scripts %}{% endblock %}
     {% endcompress %}
 

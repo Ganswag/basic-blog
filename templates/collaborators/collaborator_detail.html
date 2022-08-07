@@ -11,23 +11,38 @@
 
 
 {% block content %}
-<section id="detalles-del-autor">
-   <div class="row mt-3">
-    <div class="col-md-9 mx-auto">
-      <h2 class="section-heading mb-4">{{object.user.first_name}} {{object.user.last_name}}</h2>
-      <div>
-        {{ object.bio|safe }}
+<section class="section is-medium container" id="article-main-image">
+  <div class="container column is-10">
+    <article class="columns">
+      <div class="column is-5">
+        <img
+          style="height: 250px; display: flex; margin: auto;"
+          src="{{object.avatar.url}}"
+          alt="Avatar de {{object.user.first_name}} {{object.user.last_name}}"
+        >
       </div>
-    </div>
+      <div class="column is-5">
+        <div>
+          <h3 class="heading">{{object.occupation}} | {{object.institution}}</h3>
+          <h1 class="title">{{object.user.first_name}} {{object.user.last_name}}</h1>
+          <p>{{object.bio}}</p>
+          <br>
+          <a href="{{object.resource_url}}" class="button is-primary">Envíar correo</a>
+        </div>
+      </div>
+    </article>
   </div>
-</section>
+  </section>
 
 {% if articles %}
 <hr>
-
-<section id="mas-del-autor" class="container">
-  <h2>Todas sus contribuciones:</h2>
-  {% include 'blog/article_deck.html' with articles=articles %}
+<section class="section container">
+  <h1 class="title">Más del autor</h1>
+  <div class="columns is-10">
+    {% for article in articles %}
+     {% include 'blog/card.html' with article=article %}
+    {% endfor %}
+  </div>
 </section>
 {% endif %}
 {% endblock %}

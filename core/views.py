@@ -2,9 +2,20 @@
 
 from django.shortcuts import redirect, render
 from django.views import View
+from django.views.generic.base import ContextMixin
 from django.views.generic.detail import DetailView
 
 from .models import (SiteData, ContentManagmentSystem)
+from blog.models import Article
+
+
+class WebsiteCommonMixin(ContextMixin):
+    """This class is to apply herency and overload the get_context_data
+    method and pass common site information to all views."""
+    def get_context_data(self, **kwargs):
+        context = super(WebsiteCommonMixin, self).get_context_data(**kwargs)
+        context['site'] = SiteData.objects.order_by('-created_at')[0]
+        return context
 
 
 # Create your views here.
@@ -20,12 +31,14 @@ class Home(View):
             self.template_name,
             {
                 'site':
-                    SiteData.objects.order_by('-created_at')[0]
+                    SiteData.objects.order_by('-created_at')[0],
+                'articles':
+                    Article.objects.filter().order_by('-created_at')[:8]
             }
         )
 
 
-class ContentManagment(DetailView):
+class ContentManagment(WebsiteCommonMixin, DetailView):
     model = ContentManagmentSystem
 
 

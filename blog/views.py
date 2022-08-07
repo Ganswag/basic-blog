@@ -10,13 +10,13 @@ from django.views.generic.list import ListView
 
 from .models import Article
 from .forms import ArticleForm
+from core.views import WebsiteCommonMixin
+from registration.decorators import is_approved, is_author
 
 
-class ArticleListView(ListView):
+class ArticleListView(WebsiteCommonMixin, ListView):
     model = Article
-    template_name = 'blog/list.html'
-    paginate_by = 20
-    ordering = ['-id']
+    # ordering = ['-id']
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -29,20 +29,26 @@ class ArticleListView(ListView):
     def get_queryset(self):
         articles = Article.objects.all()
 
-        if self.kwargs.get('keywors'):
-            articles = articles.filter(keywors=self.kwargs['keywors'])
+        if self.kwargs.get('publication_type'):
+            articles = articles.filter(
+                publication_type=self.kwargs['publication_type'])
             if len(articles) == 0:
                 raise Http404()
 
         return articles
 
 
-class ArticleDetailView(DetailView):
+class ArticleDetailView(WebsiteCommonMixin, DetailView):
     model = Article
-    template_name = 'blog/detail.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['articles'] = self.get_articles()
+        context['is_author'] = self.check_author()
+
+        return context
+
+    def get_articles(self):
         articles = Article.objects.filter(
             author=self.object.author
         ).exclude(
@@ -50,29 +56,38 @@ class ArticleDetailView(DetailView):
         )
         articles = list(articles)
         random.shuffle(articles)
-        context['articles'] = articles
 
-        return context
+        return articles
+    
+    def check_author(self):
+        slug = self.request.resolver_match.kwargs['slug']
+        author = str(Article.objects.filter(slug=slug)[0].author).strip()
+        return author == self.request.user.username.strip()
 
 
-@method_decorator(staff_member_required, name='dispatch')
-class ArticleCreate(CreateView):
+@method_decorator(is_approved, name='dispatch')
+class ArticleCreate(WebsiteCommonMixin, CreateView):
     model = Article
     form_class = ArticleForm
     success_url = reverse_lazy('blog:article')
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('blog:article', args=[self.object.slug]) + '?ok'
 
 
-@method_decorator(staff_member_required, name='dispatch')
-class ArticleUpdate(UpdateView):
+@method_decorator(is_author, name='dispatch')
+class ArticleUpdate(WebsiteCommonMixin, UpdateView):
     model = Article
     form_class = ArticleForm
-    template_name_suffix = '_update_form'
 
     def get_success_url(self):
         return reverse_lazy('blog:update', args=[self.object.slug]) + '?ok'
 
 
-@method_decorator(staff_member_required, name='dispatch')
-class ArticleDelete(DeleteView):
+@method_decorator(is_author, name='dispatch')
+class ArticleDelete(WebsiteCommonMixin, DeleteView):
     model = Article
     success_url = reverse_lazy('blog:article')

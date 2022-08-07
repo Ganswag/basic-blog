@@ -34,17 +34,24 @@ class ProfileForm(forms.ModelForm):
 
         widgets = {
             'avatar': forms.ClearableFileInput(
-                attrs={'class': 'form-control-file mt-3'}
+                attrs={'class': 'file-input'}
+            ),
+            'occupation': forms.TextInput(
+                attrs={
+                    'class': 'input',
+                    'placeholder': 'Ej. Profesor de Asignatura A'
+                }
+            ),
+            'institution': forms.TextInput(
+                attrs={
+                    'class': 'input',
+                    'placeholder': 'Ej. Insituto de Ingeniería, UNAM'
+                }
             ),
             'bio': forms.Textarea(
                 attrs={
-                    'class': 'form-control m-2',
+                    'class': 'textarea',
                     'rows': 3,
                     'placeholder': 'Cuentanos lo genial que eres'}
-            ),
-            'link': forms.URLInput(
-                attrs={
-                    'class': 'form-control m-2',
-                    'placeholder': 'https://mi-perfil.com'}
             )
         }

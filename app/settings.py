@@ -21,6 +21,9 @@ config = configparser.ConfigParser()
 config.read(os.path.join(BASE_DIR, 'config.ini'))
 SECRET_KEY = config.get('env', 'secret_key')
 ENV = config.get('env', 'env')
+DOMAIN = config.get(ENV, 'domain')
+PROTOCOL = config.get(ENV, 'protocol')
+
 
 DEBUG = config.get(ENV, 'debug') == 'True'
 DB_ENGINE = config.get(ENV, 'engine')
@@ -36,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django.contrib.sitemaps',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # libraries:
@@ -134,7 +138,6 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'rstatic')
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
-   ('node_modules', os.path.join(BASE_DIR, 'node_modules/')),
 )
 
 MEDIA_URL = '/media/'
