@@ -1,7 +1,11 @@
 from django.contrib.auth.models import User
 from django.db import models
-from django.db.models.signals import post_save
-from django.dispatch import receiver
+
+
+def custom_uplad_to(instance, filename):
+    old_instance = Article.objects.get(id=instance.id)
+    old_instance.main_picture.delete()
+    return 'resources/' + filename
 
 
 class Article(models.Model):
@@ -9,20 +13,20 @@ class Article(models.Model):
     class PublicationType(models.TextChoices):
         READS = "lecturas", "Lecturas"
         VIDEOS = "videos", "Videos"
-        KAHOOT = "kahoots", "Kahoots"
+        OTHER_RESOURCES = "recursos-didacticos", "Recursos Didácticos"
 
     id = models.AutoField(primary_key=True)
     title = models.CharField(verbose_name="Título", max_length=200)
     main_picture = models.ImageField(
-        upload_to='Articles/', verbose_name="Foto de portada",
-        null=True, blank=True 
+        upload_to=custom_uplad_to, verbose_name="Foto de portada",
+        null=True, blank=True
     )
     slug = models.SlugField(max_length=250, unique=True)
     short_description = models.CharField(
         verbose_name='Descripción', null=False, max_length=300
     )
     publication_type = models.CharField(
-        verbose_name='Tipo de publicación', null=False, max_length=12,
+        verbose_name='Tipo de publicación', null=False, max_length=20,
         choices=PublicationType.choices
     )
     resource_url = models.URLField(

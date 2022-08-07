@@ -5,15 +5,6 @@ from django.db import models
 class SiteData(models.Model):
     site_name = models.CharField(
         verbose_name="Nombre del sitio", max_length=50, null=False)
-    favicon = models.ImageField(
-        upload_to='site/favicon/', verbose_name="Favicon",
-        null=True, blank=True)
-    logo = models.ImageField(
-        upload_to='site/logos/', verbose_name="Logo del sitio",
-        null=True, blank=True)
-    main_image = models.ImageField(
-        upload_to='site/images/', verbose_name="Portada del sitio",
-        null=True, blank=True)
     site_description = models.CharField(
         verbose_name="Descripción del sitio",
         max_length=500, null=False)

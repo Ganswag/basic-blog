@@ -16,7 +16,7 @@ from registration.decorators import is_approved, is_author
 
 class ArticleListView(WebsiteCommonMixin, ListView):
     model = Article
-    # ordering = ['-id']
+    ordering = ['title']
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -75,7 +75,9 @@ class ArticleCreate(WebsiteCommonMixin, CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('blog:article', args=[self.object.slug]) + '?ok'
+        return reverse_lazy('blog:article', args=[
+            self.object.publication_type, self.object.slug
+        ]) + '?ok'
 
 
 @method_decorator(is_author, name='dispatch')
@@ -84,7 +86,9 @@ class ArticleUpdate(WebsiteCommonMixin, UpdateView):
     form_class = ArticleForm
 
     def get_success_url(self):
-        return reverse_lazy('blog:update', args=[self.object.slug]) + '?ok'
+        return reverse_lazy('blog:update', args=[
+            self.object.publication_type, self.object.slug
+        ]) + '?ok'
 
 
 @method_decorator(is_author, name='dispatch')
