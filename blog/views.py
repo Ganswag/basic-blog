@@ -69,7 +69,8 @@ class ArticleDetailView(WebsiteCommonMixin, DetailView):
 class ArticleCreate(WebsiteCommonMixin, CreateView):
     model = Article
     form_class = ArticleForm
-    success_url = reverse_lazy('blog:article')
+    template_name = 'blog/article_form.html'
+
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
@@ -84,11 +85,14 @@ class ArticleCreate(WebsiteCommonMixin, CreateView):
 class ArticleUpdate(WebsiteCommonMixin, UpdateView):
     model = Article
     form_class = ArticleForm
+    template_name = 'blog/article_form.html'
 
     def get_success_url(self):
+        print('en la vista')
         return reverse_lazy('blog:update', args=[
             self.object.publication_type, self.object.slug
         ]) + '?ok'
+
 
 
 @method_decorator(is_author, name='dispatch')

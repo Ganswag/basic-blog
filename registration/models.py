@@ -4,14 +4,13 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
-def custom_uplad_to(instance, filename):
+class Profile(models.Model):
+
+    def custom_uplad_to(instance, filename):
         if Profile.objects:
             old_instance = Profile.objects.get(pk=instance.pk)
             old_instance.avatar.delete()
         return 'profiles/' + filename
-
-
-class Profile(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = models.ImageField(

@@ -17,10 +17,16 @@
   <div class="columns is-10 is-vcentered">
     <div class="column is-3">
       <a href="{% url 'blog:article' article.publication_type article.slug %}">
+        {% if article.main_picture %}
         <img
           style="height: 200px; display: flex; margin: auto;"
           src="{{ article.main_picture.url }}"
         >
+        {% else %}
+        <div class="columns is-centered">
+          <i class="fas fa-solid fa-newspaper fa-3x"></i>
+        </div>
+        {% endif %}
       </a>
     </div>
     <div class="column">

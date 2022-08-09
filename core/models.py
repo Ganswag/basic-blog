@@ -25,8 +25,10 @@ class SiteData(models.Model):
 
 class ContentManagmentSystem(models.Model):
     def custom_uplad_to(instance, filename):
-        old_instance = ContentManagmentSystem.objects.get(slug=instance.slug)
-        old_instance.avatar.delete()
+        if ContentManagmentSystem.objects.get(slug=instance.slug):
+            old_instance = ContentManagmentSystem.objects.get(
+                slug=instance.slug)
+            old_instance.avatar.delete()
         return 'site/cms/' + filename
 
     slug = models.SlugField(max_length=250, primary_key=True)

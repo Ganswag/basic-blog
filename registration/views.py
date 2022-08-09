@@ -1,11 +1,12 @@
 from django import forms
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView
 from django.views.generic.edit import UpdateView
 
-from .forms import UserCreationFormExtended, ProfileForm
+from .forms import UserCreationFormExtended, ProfileForm, LoginForm
 from .models import Profile
 from core.views import WebsiteCommonMixin
 
@@ -58,12 +59,17 @@ class SignUpView(WebsiteCommonMixin, CreateView):
 
         return form
 
+class LoginView(WebsiteCommonMixin, LoginView):
+    form_class = LoginForm
+    template_name = 'registration/login.html'
+    success_url = reverse_lazy('my-profile')
+
 
 @method_decorator(login_required, name='dispatch')
 class ProfileUpdate(WebsiteCommonMixin, UpdateView):
     form_class = ProfileForm
-    success_url = reverse_lazy('my-profile')
     template_name = 'registration/profile_form.html'
+    success_url = reverse_lazy('my-profile')
 
     def get_object(self):
         profile, _ = Profile.objects.get_or_create(user=self.request.user)

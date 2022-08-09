@@ -13,7 +13,7 @@
     <div class="container">
       <div class="column is-10 is-offset" style="margin: auto;">
         <h1 class="title">Crear o actualizar entrada</h1>
-        <form action="" method="post"> {% csrf_token %}
+        <form action="" method="post" enctype="multipart/form-data"> {% csrf_token %}
           <div class="field">
             <label class="label">Título</label>
             <div class="control">
@@ -52,9 +52,15 @@
               {{form.resource_url}}
             </div>
           </div>
+          {% if article.main_picture %}
+          <img src="{{ article.main_picture.url }}" style="max-height: 200px;">
+          <p class="mt-1">¿Borrar?
+            <input type="checkbox" id="avatar-clear" name="avatar-clear"/>
+          </p>
+          {% endif %}
           <div class="file is-boxed" style="justify-content: center;">
             <label class="file-label">
-              {{form.main_picture}}
+              {{ form.main_picture }}
               <span class="file-cta">
                 <span class="file-icon">
                   <i class="fas fa-upload"></i>
@@ -72,10 +78,9 @@
               <button class="button is-link is-light">Cancelar</button>
             </div>
             <div class="control">
-              <button class="button is-link" type="submit">Crear</button>
+              <button class="button is-link" type="submit">Crear o Actualizar</button>
             </div>
           </div>
-            <!-- {{ form.as_p }} -->
         </form>
       </div>
     </div>

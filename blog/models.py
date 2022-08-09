@@ -2,18 +2,20 @@ from django.contrib.auth.models import User
 from django.db import models
 
 
-def custom_uplad_to(instance, filename):
-    old_instance = Article.objects.get(id=instance.id)
-    old_instance.main_picture.delete()
-    return 'resources/' + filename
-
-
 class Article(models.Model):
 
     class PublicationType(models.TextChoices):
         READS = "lecturas", "Lecturas"
         VIDEOS = "videos", "Videos"
         OTHER_RESOURCES = "recursos-didacticos", "Recursos Didácticos"
+    
+    def custom_uplad_to(instance, filename):
+        print('estoy en custom de article')
+        print(instance.id)
+        if Article.objects.get(id=instance.id):
+            old_instance = Article.objects.get(id=instance.id)
+            old_instance.main_picture.delete()
+        return 'resources/' + filename
 
     id = models.AutoField(primary_key=True)
     title = models.CharField(verbose_name="Título", max_length=200)

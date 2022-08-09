@@ -38,8 +38,8 @@ urlpatterns = [
     ),
     path(
         'blog/', include(('blog.urls', 'blog'), namespace='blog')),
-    path('usuarios/', include('django.contrib.auth.urls')),
     path('usuarios/', include('registration.urls')),
+    path('usuarios/', include('django.contrib.auth.urls')),
 ]
 
 
