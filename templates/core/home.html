@@ -11,7 +11,7 @@
 {% block content %}
 <section class="section is-medium"
   style="background-image: url('{% static '/images/main-image.jpg' %}');
-  background-repeat: no-repeat; background-size: 100%;"
+  background-repeat: no-repeat; background-size: cover;"
 >
   <div class="container has-text-centered" style="
     background-color: rgba(150, 150, 150, 0.5);
@@ -33,7 +33,7 @@
   <div class="columns is-centered">
     <div class="column is-8">
       <div class="content is-medium">
-        <p>Holiwis</p>
+        {{site.site_home|safe}} 
       </div>
     </div>
   </div>

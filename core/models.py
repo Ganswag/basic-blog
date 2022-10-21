@@ -6,12 +6,14 @@ class SiteData(models.Model):
     site_name = models.CharField(
         verbose_name="Nombre del sitio", max_length=50, null=False)
     site_description = models.CharField(
-        verbose_name="Descripción del sitio",
-        max_length=500, null=False)
+        verbose_name="Descripción del sitio", max_length=500, null=False)
+    site_home = RichTextField(
+        verbose_name="Texto de bienvenida", null=True, blank=True)
     google_tag = models.CharField(
-        verbose_name="Site Tag Google", max_length=50, null=True, blank=True)
+        verbose_name="Site Tag Google", max_length=500, null=True, blank=True)
     facebook_pixel = models.CharField(
-        verbose_name="Pixel de Facebook", max_length=50, null=True, blank=True)
+        verbose_name="Pixel de Facebook", max_length=500,
+        null=True, blank=True)
     created_at = models.DateTimeField(
         auto_now_add=True, verbose_name="Fecha de creación")
     updated_at = models.DateTimeField(

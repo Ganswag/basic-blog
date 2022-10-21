@@ -13,7 +13,9 @@ Gracias por tanto.{% endblock %}
 
 {% block content %}
 <section class="section is-medium container">
-  <h1 class="title"> Listado de acedémicos que han colaborado aqui.</h1>
+  <h1 class="title"> Nuestra comunidad, quienes han colaborado aquí.</h1>
+  <br>
+  <br>
   {% for collaborator in profile_list|dictsort:"user.first_name" reversed %}
   <div class="columns is-10 is-vcentered">
     <div class="column is-3">

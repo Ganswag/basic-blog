@@ -10,8 +10,6 @@ class Article(models.Model):
         OTHER_RESOURCES = "recursos-didacticos", "Recursos Didácticos"
     
     def custom_uplad_to(instance, filename):
-        print('estoy en custom de article')
-        print(instance.id)
         if Article.objects.get(id=instance.id):
             old_instance = Article.objects.get(id=instance.id)
             old_instance.main_picture.delete()
@@ -35,7 +33,7 @@ class Article(models.Model):
         verbose_name="URL del recurso", null=False
     )
     subject = models.CharField(
-        verbose_name='Materia relacionada', null=False, max_length=250
+        verbose_name='Temática', null=False, max_length=250
     )
     author = models.ForeignKey(
         User, on_delete=models.DO_NOTHING,

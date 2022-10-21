@@ -31,7 +31,7 @@ urlpatterns = [
     path('', include(('core.urls', 'core'), namespace='core')),
     # Apps
     path(
-        'academicos/',
+        'comunidad/',
         include(
             ('collaborators.urls', 'collaborators'), namespace='collaborators'
         )
