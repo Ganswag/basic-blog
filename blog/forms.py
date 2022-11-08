@@ -8,7 +8,7 @@ class ArticleForm(forms.ModelForm):
     class Meta:
         model = Article
         fields = (
-            'title', 'slug', 'short_description', 'publication_type',
+            'title', 'short_description', 'publication_type',
             'subject', 'resource_url', 'main_picture'
         )
 
@@ -17,12 +17,6 @@ class ArticleForm(forms.ModelForm):
                 attrs={
                     'class': 'input',
                     'placeholder': 'Ej. Cuestionario de Meteorización'
-                }
-            ),
-            'slug': forms.TextInput(
-                attrs={
-                    'class': 'input',
-                    'placeholder': 'Ej. cuestionario-meteorizacion'
                 }
             ),
             'short_description': forms.Textarea(

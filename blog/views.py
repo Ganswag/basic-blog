@@ -4,6 +4,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.http import Http404
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
+from django.utils.text import slugify
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
@@ -73,6 +74,7 @@ class ArticleCreate(WebsiteCommonMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.author = self.request.user
+        form.instance.slug = slugify(form.instance.title)
         return super().form_valid(form)
 
     def get_success_url(self):
