@@ -3,12 +3,20 @@ from django.db import models
 
 
 class SiteData(models.Model):
+    def custom_uplad_to(instance, filename):
+        old_instance = SiteData.objects.get(id=instance.id)
+        old_instance.logo.delete()
+        return 'site/' + filename
+    
     site_name = models.CharField(
         verbose_name="Nombre del sitio", max_length=50, null=False)
     site_description = models.CharField(
         verbose_name="Descripción del sitio", max_length=500, null=False)
     site_home = RichTextField(
         verbose_name="Texto de bienvenida", null=True, blank=True)
+    favicon = models.ImageField(
+        upload_to=custom_uplad_to, verbose_name="Favicon",
+        null=True, blank=True)
     google_tag = models.CharField(
         verbose_name="Site Tag Google", max_length=500, null=True, blank=True)
     facebook_pixel = models.CharField(

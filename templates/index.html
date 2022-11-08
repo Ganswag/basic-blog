@@ -16,7 +16,6 @@
 
         {% load static %}
 
-        <link rel="shortcut icon" type="image/png" href="{{site.favicon.url}}"/>
         <link href="{% static 'css/app.css' %}" rel="stylesheet">
         {% load compress %}
         {% compress css inline %}
@@ -26,6 +25,12 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
         <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
         <!-- //Needed CDN scripts -->
+
+        {% if site.favicon %}
+          <link rel="shortcut icon" type="image/png" href="{{ site.favicon.url }}"/>
+        {% else %}
+          <link rel="shortcut icon" type="image/png" href="{% static '/images/division-ciencias-tierra.png' %}"/>
+        {% endif %}
 
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
